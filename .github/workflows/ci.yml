@@ -1,0 +1,89 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l .)"
+      - run: go vet ./...
+      - run: go build ./...
+      - run: go test ./...
+
+  # `go get` must work with no GOPRIVATE, no token, no proxy override. That is
+  # the whole point of the repository being public, so it is a test, not a
+  # README claim: resolve the module from the public proxy in a clean module
+  # cache, in a module that has nothing to do with this checkout.
+  go-get:
+    runs-on: ubuntu-latest
+    needs: go
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: plain go get from a bare module
+        run: |
+          mkdir -p /tmp/consumer && cd /tmp/consumer
+          go mod init example.com/consumer
+          go get github.com/elkproject/stride-sdk@${{ github.sha }}
+          cat > main.go <<'EOF'
+          package main
+
+          import (
+              "fmt"
+
+              "github.com/elkproject/stride-sdk/stride"
+              "github.com/elkproject/stride-sdk/stridesdk"
+          )
+
+          func main() {
+              c := stridesdk.New(stridesdk.Config{Source: stride.SourceRef{System: "x"}})
+              fmt.Println("enabled:", c.Enabled())
+          }
+          EOF
+          go run .
+        env:
+          GOPRIVATE: ""
+          GOFLAGS: ""
+
+  ts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      # The published artifact is dist/, not src/ — external consumers cannot
+      # compile raw TypeScript out of node_modules. Build it in CI so a broken
+      # emit is caught here rather than at publish time.
+      - run: npm run build
+      - name: dist carries emitted types
+        run: test -f dist/index.js && test -f dist/index.d.ts
+
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -v

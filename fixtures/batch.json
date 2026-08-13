@@ -1,0 +1,98 @@
+{
+  "source": {
+    "system": "clawfight",
+    "service": "clawfight-runtime",
+    "environment": "staging",
+    "version": "0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b"
+  },
+  "observations": [
+    {
+      "id": "01JZZFIXTURE00000000000001",
+      "time": "2026-07-13T12:00:00.000Z",
+      "kind": "operation_started",
+      "operation": "clawfight.http.get:/api/matches/:id",
+      "status": "unknown",
+      "context": {
+        "trace_id": "match-11111111-2222-3333-4444-555555555555",
+        "span_id": "span-root",
+        "request_id": "req-0001",
+        "session_id": "anon-abc"
+      }
+    },
+    {
+      "id": "01JZZFIXTURE00000000000002",
+      "time": "2026-07-13T12:00:00.150Z",
+      "kind": "dependency_called",
+      "operation": "anthropic.messages",
+      "status": "success",
+      "duration_ms": 850,
+      "context": {
+        "trace_id": "match-11111111-2222-3333-4444-555555555555",
+        "span_id": "span-llm",
+        "parent_span_id": "span-root",
+        "request_id": "req-0001"
+      },
+      "attributes": {
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "input_tokens": 412,
+        "output_tokens": 96
+      }
+    },
+    {
+      "id": "01JZZFIXTURE00000000000003",
+      "time": "2026-07-13T12:00:01.100Z",
+      "kind": "operation_failed",
+      "operation": "clawfight.http.get:/api/matches/:id",
+      "status": "failure",
+      "duration_ms": 1100,
+      "context": {
+        "trace_id": "match-11111111-2222-3333-4444-555555555555",
+        "span_id": "span-root",
+        "request_id": "req-0001",
+        "session_id": "anon-abc"
+      },
+      "attributes": {
+        "status_code": 500
+      },
+      "error": {
+        "class": "DatabaseError",
+        "code": "CONNECTION_RESET",
+        "message": "connection reset by peer",
+        "fingerprint": "db-conn-reset",
+        "retryable": true
+      }
+    },
+    {
+      "id": "01JZZFIXTURE00000000000004",
+      "time": "2026-07-13T12:00:30.000Z",
+      "kind": "heartbeat",
+      "operation": "clawfight.heartbeat",
+      "status": "unknown"
+    },
+    {
+      "id": "01JZZFIXTURE00000000000005",
+      "time": "2026-07-13T12:01:00.000Z",
+      "kind": "job_started",
+      "operation": "clawfight.job.judging_cycle",
+      "status": "unknown",
+      "context": {
+        "request_id": "cron-hourly-0001"
+      }
+    },
+    {
+      "id": "01JZZFIXTURE00000000000006",
+      "time": "2026-07-13T12:01:02.500Z",
+      "kind": "job_completed",
+      "operation": "clawfight.job.judging_cycle",
+      "status": "success",
+      "duration_ms": 2500,
+      "context": {
+        "request_id": "cron-hourly-0001"
+      },
+      "attributes": {
+        "cron": "0 * * * *"
+      }
+    }
+  ]
+}
