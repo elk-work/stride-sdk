@@ -51,6 +51,7 @@ jobs:
               fmt.Println("enabled:", c.Enabled())
           }
           EOF
+          go mod tidy
           go run .
         env:
           GOPRIVATE: ""
