@@ -35,15 +35,15 @@ jobs:
         run: |
           mkdir -p /tmp/consumer && cd /tmp/consumer
           go mod init example.com/consumer
-          go get github.com/elkproject/stride-sdk@${{ github.sha }}
+          go get github.com/elk-work/stride-sdk@${{ github.sha }}
           cat > main.go <<'EOF'
           package main
 
           import (
               "fmt"
 
-              "github.com/elkproject/stride-sdk/stride"
-              "github.com/elkproject/stride-sdk/stridesdk"
+              "github.com/elk-work/stride-sdk/stride"
+              "github.com/elk-work/stride-sdk/stridesdk"
           )
 
           func main() {

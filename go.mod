@@ -1,4 +1,4 @@
-module github.com/elkproject/stride-sdk
+module github.com/elk-work/stride-sdk
 
 go 1.26
 

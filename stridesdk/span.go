@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/elkproject/stride-sdk/stride"
+	"github.com/elk-work/stride-sdk/stride"
 )
 
 // Propagation header names, mirroring the TypeScript SDK. The x-watch-

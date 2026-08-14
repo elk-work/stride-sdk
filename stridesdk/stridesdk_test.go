@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/elkproject/stride-sdk/stride"
+	"github.com/elk-work/stride-sdk/stride"
 )
 
 // capture is an httptest handler that records every ingest request.

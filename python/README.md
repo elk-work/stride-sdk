@@ -28,6 +28,6 @@ and the drop count rides the next successful batch as a `metric_sampled`
 observation. `atexit` flushes what is left.
 
 There is no default endpoint. Full documentation, the wire contract, and the
-Go and TypeScript SDKs: <https://github.com/elkproject/stride-sdk>
+Go and TypeScript SDKs: <https://github.com/elk-work/stride-sdk>
 
 Apache-2.0.

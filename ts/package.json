@@ -1,5 +1,5 @@
 {
-  "name": "@elk/stride-sdk",
+  "name": "@elk-work/stride-sdk",
   "version": "0.1.0",
   "description": "Stride observation emitter for Cloudflare Workers, Node, and any fetch-capable runtime",
   "license": "Apache-2.0",
@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elkproject/stride-sdk.git",
+    "url": "git+https://github.com/elk-work/stride-sdk.git",
     "directory": "ts"
   },
-  "homepage": "https://github.com/elkproject/stride-sdk#readme",
+  "homepage": "https://github.com/elk-work/stride-sdk#readme",
   "bugs": {
-    "url": "https://github.com/elkproject/stride-sdk/issues"
+    "url": "https://github.com/elk-work/stride-sdk/issues"
   },
   "keywords": [
     "observability",

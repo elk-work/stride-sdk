@@ -8,12 +8,12 @@ One wire format, three languages, one repository.
 
 | Language | Directory | Install |
 |---|---|---|
-| Go | [`stride/`](stride), [`stridesdk/`](stridesdk) | `go get github.com/elkproject/stride-sdk` |
-| TypeScript | [`ts/`](ts) | `npm install @elk/stride-sdk` |
+| Go | [`stride/`](stride), [`stridesdk/`](stridesdk) | `go get github.com/elk-work/stride-sdk` |
+| TypeScript | [`ts/`](ts) | `npm install @elk-work/stride-sdk` |
 | Python | [`python/`](python) | `pip install elk-stride-sdk` |
 
 The Go module sits at the repository root so its import path is
-`github.com/elkproject/stride-sdk/stridesdk` rather than
+`github.com/elk-work/stride-sdk/stridesdk` rather than
 `.../stride-sdk/go/stridesdk`. Go is the only one of the three whose public
 name is decided by directory layout, so it gets the root; `ts/` and `python/`
 name themselves in their own manifests.
@@ -69,7 +69,7 @@ Built for Cloudflare Workers first: no background timers, one flush per
 request via the runtime's `waitUntil`.
 
 ```ts
-import { createStrideFromEnv } from '@elk/stride-sdk';
+import { createStrideFromEnv } from '@elk-work/stride-sdk';
 
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext) {

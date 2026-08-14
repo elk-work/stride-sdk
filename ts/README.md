@@ -1,14 +1,14 @@
-# @elk/stride-sdk
+# @elk-work/stride-sdk
 
 Stride observation emitter for Cloudflare Workers, Node, and any fetch-capable
 runtime. Zero runtime dependencies.
 
 ```bash
-npm install @elk/stride-sdk
+npm install @elk-work/stride-sdk
 ```
 
 ```ts
-import { createStrideFromEnv } from '@elk/stride-sdk';
+import { createStrideFromEnv } from '@elk-work/stride-sdk';
 
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext) {
@@ -33,6 +33,6 @@ allowlist, and drops are reported rather than hidden.
 to its `WATCH_*` predecessor. There is no default ingest URL.
 
 Full documentation, the wire contract, and the Go and Python SDKs:
-<https://github.com/elkproject/stride-sdk>
+<https://github.com/elk-work/stride-sdk>
 
 Apache-2.0.

@@ -13,7 +13,7 @@ import (
 
 	"github.com/oklog/ulid/v2"
 
-	"github.com/elkproject/stride-sdk/stride"
+	"github.com/elk-work/stride-sdk/stride"
 )
 
 // Defaults for Config; see the field docs.

@@ -2,7 +2,7 @@
 // observations in memory and ships them in batches to
 // POST {Endpoint}/v1/observations:batch, mirroring the TypeScript (ts/) and
 // Python (python/) SDKs and reusing the wire types from
-// github.com/elkproject/stride-sdk/stride verbatim.
+// github.com/elk-work/stride-sdk/stride verbatim.
 //
 // # Usage
 //
