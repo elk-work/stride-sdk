@@ -18,9 +18,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/elkproject/stride-sdk"
-Source = "https://github.com/elkproject/stride-sdk"
-Issues = "https://github.com/elkproject/stride-sdk/issues"
+Homepage = "https://github.com/elk-work/stride-sdk"
+Source = "https://github.com/elk-work/stride-sdk"
+Issues = "https://github.com/elk-work/stride-sdk/issues"
 
 [tool.setuptools]
 packages = ["elk_stride"]
