@@ -1,0 +1,39 @@
+# Publishes @elk-work/stride-sdk to npm via OIDC trusted publishing — no token
+# secrets stored anywhere (docs.npmjs.com/trusted-publishers).
+#
+# One-time npmjs-side setup (org owner): the package's (or org's) settings →
+# Trusted publishers → GitHub Actions → owner `elk-work`, repository
+# `stride-sdk`, workflow `npm-publish.yml`, environment blank. If npm refuses
+# a FIRST publish via OIDC (the package page may need to exist before its
+# settings do), bootstrap once with `npm publish --access public --otp <code>`
+# from ts/ — every subsequent release then flows through this workflow.
+#
+# Release flow: push a v* tag (or run manually). Publishes with provenance.
+name: npm-publish
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write   # the OIDC grant — this is what replaces the token
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest   # OIDC publish needs npm >= 11.5
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm publish --access public
