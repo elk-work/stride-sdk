@@ -9,9 +9,10 @@ jobs:
   go:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
+          cache-dependency-path: go.sum
           go-version-file: go.mod
       - name: gofmt
         run: test -z "$(gofmt -l .)"
@@ -28,7 +29,7 @@ jobs:
     needs: go
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version: stable
       - name: plain go get from a bare module
@@ -63,9 +64,10 @@ jobs:
       run:
         working-directory: ts
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
+          package-manager-cache: false
           node-version: 22
       - run: npm ci
       - run: npm run typecheck
@@ -83,8 +85,8 @@ jobs:
       run:
         working-directory: python
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: python -m unittest discover -v
